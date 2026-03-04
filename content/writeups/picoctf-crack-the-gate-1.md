@@ -1,0 +1,90 @@
+---
+title: 'picoCTF Crack the Gate 1'
+date: 2026-01-31
+description: "In this writeup, I solve picoCTF's Crack the Gate 1 challenge by examining the page's HTML source, decrypting the message left by developers and using it to bypass the login page without a password."
+author: 'Khashayar Khosrosourmi'
+image:
+    url: '/writeups/picoctf-crack-the-gate-1/thumbnail.png'
+    alt: 'picoctf crack the gate 1 thumbnail'
+tags: ["ctf", "web-exploitation", "authentication-bypass", "rot13"]
+---
+
+## Challenge Description
+We’re in the middle of an investigation. One of our persons of interest, ctf player, is believed to be hiding sensitive data inside a restricted web portal. We’ve uncovered the email address he uses to log in: `ctf-player@picoctf.org`. Unfortunately, we don’t know the password, and the usual guessing techniques haven’t worked. But something feels off... it’s almost like the developer left a secret way in. Can you figure it out? The website is running here. Can you try to log in?
+
+![Crack the gate screenshot 1](/writeups/picoctf-crack-the-gate-1/screenshot1.png)
+
+## Hint 1
+Developers sometimes leave notes in the code; but not always in plain text.
+
+## Hint 2
+A common trick is to rotate each letter by 13 positions in the alphabet.
+
+## Solution
+The challenge presents a login page that needs to be bypassed. The email address is provided, but the password is unknown.
+
+![Crack the gate screenshot 2](/writeups/picoctf-crack-the-gate-1/screenshot2.png)
+
+
+From Hint1, it becomes clear that the developers may have left a hidden note inside the source code.
+To investigate further, I opened the HTML source using my browser’s developer tools and found the following comment:
+
+![Crack the gate screenshot 4](/writeups/picoctf-crack-the-gate-1/screenshot4.png)
+
+The comment appears to be encrypted. Based on Hint2, I recognized this as a ROT13 cipher, where each letter is rotated 13 positions in the alphabet.
+To decrypt it, I wrote a small Python script:
+
+```python
+
+alphabet = [
+    "a", "b", "c", "d", "e", "f", "g", "h", "i",
+    "j", "k", "l", "m", "n", "o", "p", "q", "r",
+    "s", "t", "u", "v", "w", "x", "y", "z",
+]
+
+encrypted = "ABGR: Wnpx - grzcbenel olcnff: hfr urnqre 'K-Qri-Npprff: lrf' "
+decrypted = ""
+
+for letter in encrypted:
+    letter = letter.lower()
+    if letter.isalpha():
+        new_index = alphabet.index(letter) + 13
+        if new_index >= len(alphabet):
+            new_index = new_index - len(alphabet)
+        decrypted += alphabet[new_index]
+
+    else:
+        decrypted += letter
+
+print(decrypted)
+
+```
+
+The decrypted output was:
+
+![Crack the gate screenshot 5](/writeups/picoctf-crack-the-gate-1/screenshot5.png)
+
+This reveals that the application checks for a special request header:
+
+`x-dev-access: yes`
+
+By including this header in the login request, the portal allows access without requiring the password.
+
+To exploit this, I enabled Burp Suite’s proxy and sent a login request with an arbitrary password:
+
+![Crack the gate screenshot 3](/writeups/picoctf-crack-the-gate-1/screenshot3.png)
+
+Next, I located the request in the Proxy history and sent it to Repeater:
+
+![Crack the gate screenshot 6](/writeups/picoctf-crack-the-gate-1/screenshot6.png)
+
+Inside Repeater, I added the required header:
+
+`x-dev-access: yes`
+
+Then I sent the modified request again. This successfully bypassed authentication and revealed the flag:
+
+![Crack the gate screenshot 8](/writeups/picoctf-crack-the-gate-1/screenshot8.png)
+
+
+
