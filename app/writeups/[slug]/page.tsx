@@ -1,7 +1,8 @@
 import { getWriteupBySlug } from "@/lib/writeups.server";
+import MdxLayout from "@/components/MdxLayout";
 
 type Props = {
-  params: { slug: string } | Promise<{ slug: string }>;
+  params: { slug: string };
 };
 
 export default async function WriteupPage({ params }: Props) {
@@ -13,8 +14,10 @@ export default async function WriteupPage({ params }: Props) {
 
   return (
     <article className="prose prose-invert max-w-3xl mx-auto py-20">
-      <h1>{post.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
+      <MdxLayout>
+        <h1>{post.title}</h1>
+        {post.content}
+      </MdxLayout>  
     </article>
   );
 }

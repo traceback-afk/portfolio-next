@@ -1,8 +1,9 @@
-import type WriteupFrontmatter from "./WriteupFrontmatter"
+import type { ReactNode } from "react";
+import type WriteupFrontmatter from "./writeupFrontmatter";
 
 type Writeup = WriteupFrontmatter & {
-    slug: string
-    contentHtml: string
-}
+  slug: string;
+  content: ReactNode;
+};
 
-export default Writeup
+export default Writeup;

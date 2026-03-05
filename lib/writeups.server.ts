@@ -1,19 +1,18 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { remark } from "remark";
-import html from "remark-html";
+import { compileMDX } from "next-mdx-remote/rsc";
+
 import type Writeup from "@/types/writeup";
-import type WriteupFrontmatter from "@/types/WriteupFrontmatter";
+import type WriteupFrontmatter from "@/types/writeupFrontmatter";
 
 const WRITEUPS_PATH = path.join(process.cwd(), "content/writeups");
 
-
-export function getAllWriteups(): Omit<Writeup, "contentHtml">[] {
+export function getAllWriteups(): Omit<Writeup, "content">[] {
   const files = fs.readdirSync(WRITEUPS_PATH);
 
   const posts = files.map((file) => {
-    const slug = file.replace(".md", "");
+    const slug = file.replace(".mdx", "");
     const fileContent = fs.readFileSync(path.join(WRITEUPS_PATH, file), "utf-8");
     const { data } = matter(fileContent);
 
@@ -26,19 +25,20 @@ export function getAllWriteups(): Omit<Writeup, "contentHtml">[] {
   return posts.sort((a, b) => (a.date > b.date ? -1 : 1));
 }
 
-export async function getWriteupBySlug(slug: string): Promise<Writeup | null> {
-  const filePath = path.join(WRITEUPS_PATH, `${slug}.md`);
+export async function getWriteupBySlug(slug: string) {
+  const filePath = path.join(WRITEUPS_PATH, `${slug}.mdx`);
   if (!fs.existsSync(filePath)) return null;
 
-  const fileContent = fs.readFileSync(filePath, "utf-8");
-  const { content, data } = matter(fileContent);
+  const source = fs.readFileSync(filePath, "utf-8");
 
-  const processed = await remark().use(html).process(content);
-  const contentHtml = processed.toString();
-  console.log("Looking for slug:", slug, "Files:", fs.readdirSync(WRITEUPS_PATH));
+  const { content, frontmatter } = await compileMDX<WriteupFrontmatter>({
+    source,
+    options: { parseFrontmatter: true },
+  });
+
   return {
     slug,
-    ...(data as WriteupFrontmatter),
-    contentHtml,
+    ...frontmatter,
+    content,
   };
 }
