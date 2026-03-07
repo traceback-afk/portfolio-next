@@ -1,7 +1,5 @@
 @import "tailwindcss";
-
 @import "tw-animate-css";
-@import "shadcn/tailwind.css";
 @plugin "@tailwindcss/typography";
 
 @layer base {
@@ -204,10 +202,10 @@ body::before {
   z-index: -100;
 }
 
-#scroll-container{
+/* #scroll-container{
   background-image:
     linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
   background-size: 80px 80px;
-}
+} */
 

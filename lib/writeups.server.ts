@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { compileMDX } from "next-mdx-remote/rsc";
+import rehypePrettyCode from "rehype-pretty-code";
 
 import type Writeup from "@/types/writeup";
 import type WriteupFrontmatter from "@/types/writeupFrontmatter";
@@ -31,9 +32,21 @@ export async function getWriteupBySlug(slug: string) {
 
   const source = fs.readFileSync(filePath, "utf-8");
 
-  const { content, frontmatter } = await compileMDX<WriteupFrontmatter>({
+  const { content, frontmatter } = await compileMDX({
     source,
-    options: { parseFrontmatter: true },
+    options: {
+      parseFrontmatter: true,
+      mdxOptions: {
+        rehypePlugins: [
+          [
+            rehypePrettyCode,
+            {
+               theme: "material-theme-darker",
+            },
+          ],
+        ],
+      },
+    },
   });
 
   return {

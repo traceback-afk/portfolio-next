@@ -33,20 +33,21 @@ export default function MdxLayout({ children }: { children: React.ReactNode }) {
 
         prose-strong:text-white
 
-        prose-code:text-rose-400
-        prose-code:bg-zinc-800
-        prose-code:px-1.5
-        prose-code:py-0.5
-        prose-code:rounded
-        prose-code:before:content-none
-        prose-code:after:content-none
+        prose-code:not(pre > code):text-rose-400
+        prose-code:not(pre > code):bg-zinc-800
+        prose-code:not(pre > code):px-1.5
+        prose-code:not(pre > code):py-0.5
+        prose-code:not(pre > code):rounded
+        prose-code:not(pre > code):before:content-none
+        prose-code:not(pre > code):after:content-none
 
+        /* FENCED CODE BLOCKS */
         prose-pre:bg-zinc-900
-        prose-pre:border
-        prose-pre:border-zinc-800
-        prose-pre:rounded-lg
+        prose-pre:border prose-pre:border-zinc-800
+        prose-pre:rounded-xl
         prose-pre:p-4
         prose-pre:overflow-x-auto
+
 
         prose-hr:border-zinc-800
 

@@ -9,13 +9,13 @@ export default function Hero() {
       id="hero"
       className="relative flex flex-col justify-center h-screen w-full"
     >
-      <div className="absolute top-0 left-1/2 transform -translate-x-1/2
+      {/* <div className="absolute top-0 left-1/2 transform -translate-x-1/2
           w-200 h-200
           bg-[radial-gradient(circle,rgba(100,100,100,0.1),transparent_60%)]
           rounded-full pointer-events-none
           z-0"
-      />
-      <div className="flex flex-col items-start">
+      /> */}
+      <div className="flex flex-col items-center text-center">
         <motion.p initial={{ opacity: 0}}
           whileInView={{ opacity: 1}}
           viewport={{ once: true, amount: 0.5 }} // triggers once when 50% in view
@@ -28,7 +28,7 @@ export default function Hero() {
           whileInView={{ opacity: 1, y: 0}}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.8, ease: "easeOut", delay:0.4}}
-          className="font-bold text-5xl text-zinc-100 text-shadow-lg
+          className="font-bold text-6xl text-zinc-100 text-shadow-lg
           font-geist-mono"
         >
           Khashayar Khosrosourmi.
@@ -38,25 +38,25 @@ export default function Hero() {
           whileInView={{ opacity: 1, y: 0}}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.8, ease: "easeOut", delay:0.8}}
-          className="text-3xl leading-tight mb-6 mt-2
+          className="text-4xl leading-tight mb-6 mt-2
         tracking-tight text-zinc-400 font-semibold"
         >
-          Web Developer • Cybersecurity Enthusiast
+          I make things for the web, and break them.
         </motion.h1>
         <motion.div
           initial={{ opacity: 0}}
           whileInView={{ opacity: 1}}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.8, ease: "easeOut", delay:1.4}}
-          className="flex gap-4 flex-wrap">
-          <Link href="/#projects" className="py-2 px-8 bg-rose-700
+          className="flex gap-4 flex-wrap justify-center">
+          <Link href="/#projects" className="py-2 px-8 bg-rose-600
           shadow-xl text-zinc-100 text-xl font-semibold
           hover:bg-rose-800 hover:text-zinc-50 transition-all
-          duration-200 btn-noise">
+          duration-200 btn-noise w-full md:w-auto">
             Projects
           </Link>
-          <Link href="/#projects" className="py-2 px-8 border-2 border-rose-600
-          shadow-xl text-rose-600 text-xl font-semibold">
+          <Link href="/writeups" className="py-2 px-8 border-2 border-rose-600
+          shadow-xl text-rose-600 text-xl font-semibold w-full md:w-auto">
             Security Writeups
           </Link>
         </motion.div>

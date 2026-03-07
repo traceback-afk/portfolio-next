@@ -1,26 +1,41 @@
 "use client"
 
+import { useRef, useState, useEffect } from "react";
+
 import Hero from "@/components/Hero";
 import About from "@/components/About";
-import Navbar from "@/components/Navbar";
+import HomeSidebar from "@/components/HomeSidebar";
 import SmallNavbar from "@/components/SmallNavbar";
 import Projects from "@/components/Projects";
 import Writeups from "@/components/Writeups";
 
 export default function Home() {
+  const aboutRef = useRef<HTMLDivElement | null>(null);
+  const [showSidebar, setShowSidebar] = useState(false);
+
+  useEffect(() => {
+    if (!aboutRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowSidebar(entry.isIntersecting);
+      },
+      { threshold: 0.1 } // trigger when 10% of the section is visible
+    );
+
+    observer.observe(aboutRef.current);
+
+    return () => {
+      if (aboutRef.current) observer.unobserve(aboutRef.current);
+    };
+  }, []);
+
   return (
-    <div className="flex">
-      <div className="hidden md:flex md:w-3/12
-      fixed left-0 top-0 h-screen">
-        <Navbar />
-      </div>
-      <div className="w-full md:w-9/12 md:ml-auto md:px-31 px-10" id="scroll-container">
-        <SmallNavbar/>
+    <div>
         <Hero/>
         <About />
         <Projects/>
         <Writeups/>
-      </div>
     </div>
   );
 }
