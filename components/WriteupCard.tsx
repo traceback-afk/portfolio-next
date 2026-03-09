@@ -26,14 +26,29 @@ const WriteupCard: React.FC<TextDisplayProps> =
                         {title}
                     </h1>
                     <p className="text-md text-zinc-300 mb-4">
-                        {description}
+                        {(() => {
+                        const words = description.split(" ");
+                        return words.length > 10 ? words.slice(0, 10).join(" ") + "..." : description;
+                        })()}
                     </p>
                 </div>
-                <div className="flex gap-2">
-                    {tags.map((tag)=>(
-                        <small key={tag} className="text-zinc-500">
-                            {tag}
-                        </small>
+                <div className="flex gap-2 flex-wrap">
+                    {tags.map((tag) => (
+                        <span
+                        key={tag}
+                        className="
+                            text-xs
+                            text-zinc-300
+                            bg-zinc-700/60
+                            border border-zinc-600
+                            px-2.5 py-1
+                            rounded-sm
+                            transition-colors duration-200
+                            group-hover:border-rose-500/60
+                        "
+                        >
+                        {tag}
+                        </span>
                     ))}
                 </div>
             </div>

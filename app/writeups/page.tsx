@@ -1,20 +1,26 @@
 import Link from "next/link";
 import { getAllWriteups } from "@/lib/writeups.server";
+import WriteupCard from "@/components/WriteupCard";
 
 export default async function Writeups() {
   const posts = await getAllWriteups()
   return (
-    <div className="max-w-3xl mx-auto py-20">
-      <h1 className="text-3xl font-bold mb-10">Writeups</h1>
-
-      {posts.map((post) => (
-        <Link key={post.slug} href={`/writeups/${post.slug}`}>
-          <div className="mb-6 p-6 border rounded-lg hover:bg-neutral-900">
-            <h2 className="text-xl font-semibold">{post.frontmatter.title}</h2>
-            <p className="text-neutral-400">{post.frontmatter.description}</p>
-          </div>
-        </Link>
-      ))}
+    <div className="py-20 w-full justify-start">
+      <h1 className="text-3xl font-bold mb-10 text-start text-zinc-100">Writeups</h1>
+      <div className="flex justify-between flex-wrap">
+        <div className="w-full md:w-3/12">
+          <h1>search</h1>
+        </div>
+        <div className="md:w-9/12 grid grid-cols-1 md:grid-cols-2 gap-2">
+          {posts.map(p => (
+            <Link key={p.slug} href={`/writeups/${p.slug}`}>
+              <WriteupCard title={p.frontmatter.title}
+                        description={p.frontmatter.description}
+                        tags={p.frontmatter.tags}/>
+            </Link>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

@@ -9,7 +9,7 @@ export default function Navbar (){
                     <Link href="/" className="text-zinc-200 font-semibold">Khashayar.</Link>
                 </div>
                 <div className="flex justify-between items-center gap-8">
-                    <Link href="/writeups" className="text-zinc-200 font-semibold">Projects</Link>
+                    <Link href="/projects" className="text-zinc-200 font-semibold">Projects</Link>
                     <Link href="/writeups" className="text-zinc-200 font-semibold">Writeups</Link>
                     <a href="#" className="text-zinc-200 font-semibold flex items-center gap-1">
                         Github

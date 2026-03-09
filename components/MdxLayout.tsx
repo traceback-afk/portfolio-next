@@ -7,7 +7,6 @@ export default function MdxLayout({ children }: { children: React.ReactNode }) {
         wrap-break-word
         w-full
         prose-pre:rounded-none
-        prose-headings:mt-8
         prose-headings:font-semibold
       prose-headings:text-zinc-100
         prose-h1:text-5xl

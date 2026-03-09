@@ -4,7 +4,7 @@ export default function Projects(){
     return (
         <section className="flex flex-col
             justify-center relative w-full
-            overflow-hidden min-h-screen" id="projects">
+            overflow-hidden py-20" id="projects">
             <motion.h1 initial={{ opacity: 0}}
                 whileInView={{ opacity: 1}}
                 viewport={{ once: true, amount: 1 }}
