@@ -1,10 +1,4 @@
-import { readFile } from "fs/promises";
 import path from "path";
-import { compile } from '@mdx-js/mdx'
-import remarkFrontmatter from 'remark-frontmatter'
-import remarkMdxFrontmatter from "remark-mdx-frontmatter";
-import { compileMDX } from "next-mdx-remote/rsc";
-import rehypePrettyCode from "rehype-pretty-code";
 import {read} from "to-vfile"
 import {matter} from "vfile-matter"
 
@@ -29,7 +23,6 @@ export async function getAllWriteups(): Promise<Omit<Writeup, "content">[]> {
       }
     })
   )
-  console.log(writeups)
 
   return writeups.sort(
     (a, b) =>

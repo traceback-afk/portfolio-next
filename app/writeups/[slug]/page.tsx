@@ -6,6 +6,7 @@ import remarkFrontmatter from "remark-frontmatter"
 import remarkMdxFrontmatter from "remark-mdx-frontmatter"
 import type WriteupFrontmatter from "@/types/writeupFrontmatter"
 import MdxLayout from "@/components/MdxLayout"
+import rehypePrettyCode from "rehype-pretty-code"
 
 type Props = {
   params: { slug: string }
@@ -22,6 +23,12 @@ export default async function WriteupPage({ params }: Props) {
   const compiled = await compile(await readFile(filepath), {
     outputFormat: "function-body",
     remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
+    rehypePlugins: [
+      [rehypePrettyCode, {
+        theme: "one-dark-pro",
+        grid: true,
+      }]
+    ]
   })
 
   const { default: Content, frontmatter } = await run(compiled, runtime) as {
@@ -33,11 +40,12 @@ export default async function WriteupPage({ params }: Props) {
 
   return (
     <div className="flex justify-center pt-20 w-full">
-      <MdxLayout>
-        <h1>{frontmatter.title}</h1>
-          <Content />
-      </MdxLayout>
+      <div className="max-w-3xl">
+        <MdxLayout>
+          <h1>{frontmatter.title}</h1>
+            <Content />
+        </MdxLayout>
+      </div>
     </div>
-
   )
 }
