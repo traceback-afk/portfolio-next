@@ -37,9 +37,9 @@ export default function Writeups() {
                         whileInView={{ opacity: 1, x:0 }}
                         viewport={{ once: true, amount: 1 }}
                         transition={{ duration: 0.4, ease: "easeOut", delay: 0.4 }}>
-                        <WriteupCard title={p.title}
-                                    description={p.description}
-                                    tags={p.tags}/>
+                        <WriteupCard title={p.frontmatter.title}
+                                    description={p.frontmatter.description}
+                                    tags={p.frontmatter.tags}/>
                     </motion.a>
                 ))}
             </div>

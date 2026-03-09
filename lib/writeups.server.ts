@@ -1,57 +1,39 @@
-import fs from "fs";
+import { readFile } from "fs/promises";
 import path from "path";
-import matter from "gray-matter";
+import { compile } from '@mdx-js/mdx'
+import remarkFrontmatter from 'remark-frontmatter'
+import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import { compileMDX } from "next-mdx-remote/rsc";
 import rehypePrettyCode from "rehype-pretty-code";
+import {read} from "to-vfile"
+import {matter} from "vfile-matter"
 
 import type Writeup from "@/types/writeup";
-import type WriteupFrontmatter from "@/types/writeupFrontmatter";
+import { readdirSync } from "fs";
 
-const WRITEUPS_PATH = path.join(process.cwd(), "content/writeups");
+const WRITEUPS_DIR = "content/writeups"
+const WRITEUPS_PATH = path.join(process.cwd(), WRITEUPS_DIR);
 
-export function getAllWriteups(): Omit<Writeup, "content">[] {
-  const files = fs.readdirSync(WRITEUPS_PATH);
+export async function getAllWriteups(): Promise<Omit<Writeup, "content">[]> {
+  const files = readdirSync(WRITEUPS_PATH)
 
-  const posts = files.map((file) => {
-    const slug = file.replace(".mdx", "");
-    const fileContent = fs.readFileSync(path.join(WRITEUPS_PATH, file), "utf-8");
-    const { data } = matter(fileContent);
+  const writeups = await Promise.all(
+    files.map(async (f) => {
+      const slug = f.replace(".mdx", "")
+      const file = await read(path.join(WRITEUPS_PATH, f))
+      matter(file)
+      const frontmatter = file.data.matter as Writeup["frontmatter"]
+      return {
+        slug,
+        frontmatter
+      }
+    })
+  )
+  console.log(writeups)
 
-    return {
-      slug,
-      ...(data as WriteupFrontmatter),
-    };
-  });
-
-  return posts.sort((a, b) => (a.date > b.date ? -1 : 1));
-}
-
-export async function getWriteupBySlug(slug: string) {
-  const filePath = path.join(WRITEUPS_PATH, `${slug}.mdx`);
-  if (!fs.existsSync(filePath)) return null;
-
-  const source = fs.readFileSync(filePath, "utf-8");
-
-  const { content, frontmatter } = await compileMDX({
-    source,
-    options: {
-      parseFrontmatter: true,
-      mdxOptions: {
-        rehypePlugins: [
-          [
-            rehypePrettyCode,
-            {
-               theme: "material-theme-darker",
-            },
-          ],
-        ],
-      },
-    },
-  });
-
-  return {
-    slug,
-    ...frontmatter,
-    content,
-  };
+  return writeups.sort(
+    (a, b) =>
+      new Date(b.frontmatter.date).getTime() -
+      new Date(a.frontmatter.date).getTime()
+  )
 }

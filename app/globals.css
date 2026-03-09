@@ -19,53 +19,6 @@
 }
 
 
-@keyframes blobFloat {
-    0% {
-      transform: translate(0, 0) scale(1);
-    }
-    50% {
-      transform: translate(25px, -20px) scale(1.05);
-    }
-    100% {
-      transform: translate(0, 0) scale(1);
-    }
-  }
-
-  @keyframes blobFloat2 {
-    0% {
-      transform: translate(0, 0) scale(1);
-    }
-    50% {
-      transform: translate(-20px, 15px) scale(1.03);
-    }
-    100% {
-      transform: translate(0, 0) scale(1);
-    }
-  }
-
-  @keyframes blobFloat3 {
-    0% {
-      transform: translate(0, 0) scale(1);
-    }
-    50% {
-      transform: translate(-100px, 50px) scale(1.03);
-    }
-    100% {
-      transform: translate(0, 0) scale(1);
-    }
-  }
-
-  .blob-anim-1 {
-    animation: blobFloat 14s ease-in-out infinite;
-  }
-
-  .blob-anim-2 {
-    animation: blobFloat2 18s ease-in-out infinite;
-  }
-  .blob-anim-3 {
-    animation: blobFloat3 50s ease-in-out infinite;
-  }
-
   @theme inline {
     --radius-sm: calc(var(--radius) - 4px);
     --radius-md: calc(var(--radius) - 2px);
@@ -186,7 +139,7 @@
 }
 
 body {
-  position: relative; /* ensure absolute children reference body */
+  position: relative;
 }
 
 
@@ -201,11 +154,3 @@ body::before {
   pointer-events: none;
   z-index: -100;
 }
-
-/* #scroll-container{
-  background-image:
-    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-  background-size: 80px 80px;
-} */
-

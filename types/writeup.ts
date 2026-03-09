@@ -1,9 +1,10 @@
-import type { ReactNode } from "react";
 import type WriteupFrontmatter from "./writeupFrontmatter";
+import type { MDXContent } from "mdx/types";
 
-type Writeup = WriteupFrontmatter & {
+type Writeup = {
   slug: string;
-  content: ReactNode;
+  frontmatter: WriteupFrontmatter
+  content: MDXContent;
 };
 
 export default Writeup;
