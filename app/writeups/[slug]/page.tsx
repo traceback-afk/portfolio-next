@@ -39,7 +39,7 @@ export default async function WriteupPage({ params }: Props) {
   if (!Content) return <div>Writeup not found</div>
 
   return (
-    <div className="flex justify-center pt-20 w-full">
+    <div className="flex justify-between py-20 w-full">
       <div className="max-w-3xl">
         <MdxLayout>
           <h1>{frontmatter.title}</h1>
