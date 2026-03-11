@@ -9,7 +9,6 @@ import SmallNavbar from "@/components/SmallNavbar";
 import Projects from "@/components/Projects";
 import Writeups from "@/components/Writeups";
 import Skills from "@/components/Skills";
-import SpotlightCards from "@/components/kokonutui/spotlight-cards";
 
 export default function Home() {
   const aboutRef = useRef<HTMLDivElement | null>(null);
