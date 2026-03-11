@@ -112,8 +112,8 @@ export default function BeamsBackground({
       const column = index % 3;
       const spacing = canvas.width / 3;
 
-      const hueBase = isDarkModeRef.current ? 0:50;
-      const hueRange = isDarkModeRef.current ? 70 : 50;
+      const hueBase = isDarkModeRef.current ? 210 : 20;
+      const hueRange = isDarkModeRef.current ? 80 : 50;
 
       beam.y = canvas.height + 100;
       beam.x =

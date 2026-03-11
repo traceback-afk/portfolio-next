@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import Navbar from "@/components/Navbar";
 
@@ -27,12 +28,12 @@ export default function RootLayout({
         className={`${inter.className} antialiased
         relative bg-zinc-900 overflow-x-hidden`}
       >
+        <Analytics/>
+        <SpeedInsights/>
         <div className="absolute inset-0 bg-black/18 -z-1"></div>
         <Navbar/>
         <div className="flex justify-center">
           <div className="w-10/12">
-            <Analytics/>
-
             {children}
           </div>
         </div>
