@@ -26,7 +26,7 @@ export default function Navbar() {
       <div className="flex py-4 w-10/12 justify-between">
         <div>
           <Link href="/" className="text-zinc-200 font-bold text-lg">
-            Khashayar Khosrosourmi
+            Khashayar
           </Link>
         </div>
 

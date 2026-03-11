@@ -13,7 +13,7 @@ export default function Hero() {
       className="flex flex-row justify-between h-screen w-full md:pt-10 items-center"
     >
         <div className="flex flex-col items-start text-start w-full md:w-6/12">
-        <BeamsBackground className="absolute -z-1 top-0 left-0"/>
+        {/* <BeamsBackground className="absolute -z-1 top-0 left-0"/> */}
           <motion.h1
             initial={{ opacity: 0, y: 20}}
             whileInView={{ opacity: 1, y: 0}}
@@ -45,16 +45,11 @@ export default function Hero() {
             <Link href="/projects">Projects</Link>
           </Button>
             <Button asChild variant="secondary" size="xl" className="shadow-2xl">
-              <Link href="/projects">Security Writeups</Link>
+              <Link href="/writeups">Security Writeups</Link>
             </Button>
           </motion.div>
         </div>
         <div className="relative w-6/12 justify-end hidden md:flex">
-          <div className="absolute -top-40 left-1/2 transform -translate-x-1/2
-              w-200 h-200
-              bg-[radial-gradient(circle,rgba(200,100,100,0.02),transparent_60%)]
-              rounded-full pointer-events-none -z-1"
-          />
           <AsciiArt src="/ascii/ascii-art-200x90.txt" />
         </div>
 
