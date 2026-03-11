@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Analytics } from '@vercel/analytics/next';
 
 import Navbar from "@/components/Navbar";
 
@@ -30,6 +31,7 @@ export default function RootLayout({
         <Navbar/>
         <div className="flex justify-center">
           <div className="w-10/12">
+            <Analytics/>
 
             {children}
           </div>
