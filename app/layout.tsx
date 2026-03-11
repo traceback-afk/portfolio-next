@@ -30,6 +30,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased
         relative bg-zinc-900 overflow-x-hidden`}
       >
+        <div className="absolute inset-0 bg-black/15 -z-1"></div>
         <Navbar/>
         <div className="flex justify-center">
           <div className="w-10/12">

@@ -1,9 +1,19 @@
 "use client"
 
+import { useRouter } from "next/navigation"
+
 export default function BackButton(){
+  const router = useRouter();
+  function handleBack(){
+    if (window.history.length > 1){
+      router.back()
+    }else{
+      router.push("/")
+    }
+  }
   return (
     <button
-      onClick={() => history.back()}
+      onClick={handleBack}
       className="inline-flex items-center gap-2 mb-6
             px-3 py-1.5
             text-sm text-zinc-300

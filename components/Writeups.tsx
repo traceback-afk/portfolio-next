@@ -18,7 +18,7 @@ export default function Writeups() {
     }, [])
 
     return (
-        <section className="flex flex-col min-h-screen w-full justify-center relative" id="writeups">
+        <section className="flex flex-col py-20 w-full justify-center relative" id="writeups">
             <motion.h1
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -29,7 +29,7 @@ export default function Writeups() {
                 Security Writeups
             </motion.h1>
 
-            <div className="mt-8 gap-3 grid md:grid-cols-2">
+            <div className="mt-8 gap-3 grid md:grid-cols-3">
 
                 {posts.map(p => (
                     <motion.a key={p.slug} href={`/writeups/${p.slug}`}

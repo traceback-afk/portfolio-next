@@ -20,11 +20,9 @@ Can you identify the components and exploit the vulnerable one? The website is r
 
 ![jauth screenshot 1](/writeups/picoctf-jauth/Screenshot1.png)
 
-## Hint 1
-Use the web browser tools to check out the JWT cookie.
-
-## Hint 2
-The JWT should always have two (2) `.` separators.
+## Hints
+ - Use the web browser tools to check out the JWT cookie.
+ - The JWT should always have two (2) `.` separators.
 
 ## Solution
 The challenge description suggests attempting to become an admin, which indicates a potential privilege-escalation attack. First, I logged in using the provided credentials `test:Test123!`.

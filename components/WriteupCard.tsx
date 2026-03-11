@@ -12,9 +12,9 @@ const WriteupCard: React.FC<TextDisplayProps> =
     return (
         <div className="w-full group border
                         border-zinc-700
-                        hover:border-rose-600
-                        transition-colors duration-200
-                        shadow-2xl h-full min-h-35
+                        hover:shadow-rose-600/10
+                        transition-all duration-350
+                        shadow-md hover:shadow-xl h-full min-h-35
                         bg-zinc-800 flex justify-between">
 
             <div className="flex flex-col py-4 px-4 justify-between">
@@ -39,12 +39,11 @@ const WriteupCard: React.FC<TextDisplayProps> =
                         className="
                             text-xs
                             text-zinc-300
-                            bg-zinc-700/60
+                            
                             border border-zinc-600
                             px-2.5 py-1
                             rounded-sm
                             transition-colors duration-200
-                            group-hover:border-rose-500/60
                         "
                         >
                         {tag}

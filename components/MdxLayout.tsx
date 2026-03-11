@@ -9,6 +9,7 @@ export default function MdxLayout({ children }: { children: React.ReactNode }) {
         prose-pre:rounded-none
         prose-headings:font-semibold
       prose-headings:text-zinc-100
+        prose-headings:scroll-mt-30
         prose-h1:text-5xl
         prose-h2:text-4xl
         prose-h3:text-3xl
@@ -16,7 +17,7 @@ export default function MdxLayout({ children }: { children: React.ReactNode }) {
         prose-h5:text-xl
         prose-h6:text-lg
         prose-p:leading-relaxed
-        prose-p:text-zinc-300
+        prose-p:text-zinc-400
         prose-blockquote:border-l-4
         prose-blockquote/quote:text-zinc-500
 
