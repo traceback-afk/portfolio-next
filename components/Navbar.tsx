@@ -23,7 +23,7 @@ export default function Navbar() {
         border-b border-transparent
       ${scrolled ? "bg-zinc-900/80 backdrop-blur-md shadow-2xl  border-b border-zinc-800" : ""}`}
     >
-      <div className="flex py-6 w-10/12 justify-between">
+      <div className="flex py-4 w-10/12 justify-between">
         <div>
           <Link href="/" className="text-zinc-200 font-bold text-lg">
             Khashayar Khosrosourmi

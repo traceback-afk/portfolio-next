@@ -18,7 +18,6 @@ className="text-3xl font-semibold text-zinc-200"
 About Me
 </motion.h2> </div>
 
-```
   {/* RIGHT CONTENT */}
   <div className="md:w-9/12 w-full space-y-10">
 

@@ -20,8 +20,9 @@ export default function AsciiArt({ src }: { src: string }) {
     whileInView={{ opacity: 1}}
     viewport={{ once: true, amount: 0.5 }}
     transition={{ duration: 0.8, ease: "easeOut", delay:0.4}}
-    className="font-mono leading-none whitespace-pre text-zinc-300 text-[5px]">
+    className="font-mono leading-none whitespace-pre text-white text-[5px]">
       {art || "Loading..."}
+      <div className="absolute inset-0 bg-zinc-950/90 rounded-full opacity-90 blur-3xl -z-1"></div>
     </motion.div>
   );
 }

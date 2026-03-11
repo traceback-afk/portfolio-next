@@ -48,30 +48,34 @@ export default async function WriteupPage({ params }: Props) {
    <div className="relative flex py-20 w-full justify-center md:justify-center">
     {/* Table of Contents */}
     <div className="mb-8 text-zinc-200 w-64 fixed top-32
-                    left-30 hidden md:block">
-      <div className="absolute right-0 top-0 h-screen w-px
+                    left-30 hidden md:flex justify-between pe-10">
+      <div>
+        <BackButton />
+        <h2 className="text-lg font-bold mb-2 text-zinc-500">Table of Contents</h2>
+        <ul className="space-y-1">
+          {headings.map((heading) => (
+            <li
+              key={heading.slug}
+              style={{
+                paddingLeft: heading.level > 1 ? `${(heading.level - 1) * 1}rem` : 0,
+              }}
+            >
+              <a
+                href={`#${heading.slug}`}
+                className="hover:text-rose-500 text-zinc-400
+                              transition-colors duration-150"
+              >
+                {heading.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="right-0 top-0 h-screen w-px
                       bg-linear-to-b from-zinc-900 via-zinc-500/30
                       to-zinc-900" />
-      <BackButton />
-      <h2 className="text-lg font-bold mb-2 text-zinc-500">Table of Contents</h2>
-      <ul className="space-y-1">
-        {headings.map((heading) => (
-          <li
-            key={heading.slug}
-            style={{
-              paddingLeft: heading.level > 1 ? `${(heading.level - 1) * 1}rem` : 0,
-            }}
-          >
-            <a
-              href={`#${heading.slug}`}
-              className="hover:text-rose-500 text-zinc-400
-                            transition-colors duration-150"
-            >
-              {heading.text}
-            </a>
-          </li>
-        ))}
-      </ul>
+
+
     </div>
 
     {/* Main content */}
